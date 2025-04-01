@@ -5,12 +5,10 @@ const conversationSchema = new mongoose.Schema({
   messages: [
     {
       text: String,
-      sender: { type: mongoose.Schema.Types.ObjectId, ref: "Message" },
-      default: [],
+      sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     },
-  ]
-} , { timestamps: true }
-);
+  ],
+}, { timestamps: true });
 
 const Conversation = mongoose.model("Conversation", conversationSchema);
 

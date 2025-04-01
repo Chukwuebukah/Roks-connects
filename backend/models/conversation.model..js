@@ -1,11 +1,26 @@
-// ...existing code...
-const conversationSchema = new mongoose.Schema({
-  participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  messages: [
-    {
-      text: String,
-      sender: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Ensure sender references User
-    },
-  ],
-}, { timestamps: true });
-// ...existing code...
+import mongoose from "mongoose";
+
+const messageSchema = new mongoose.Schema(
+	{
+		senderId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
+		receiverId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
+		message: {
+			type: String,
+			required: true,
+		},
+		// createdAt, updatedAt
+	},
+	{ timestamps: true }
+);
+
+const Message = mongoose.model("Message", messageSchema);
+
+export default Message;
